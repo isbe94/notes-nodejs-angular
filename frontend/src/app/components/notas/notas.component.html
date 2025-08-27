@@ -1,0 +1,146 @@
+<div class="row">
+  <!-- FORM -->
+  <div class="col s12 m4">
+    <div class="card hoverable z-depth-3">
+      <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">
+          Gestionar Notas
+          <i
+            class="material-icons right tooltipped"
+            data-position="right"
+            data-tooltip="Agrega o edita tus notas aquí."
+            >info_outline</i
+          >
+        </span>
+        <form #notasForm="ngForm" (ngSubmit)="addNotas(notasForm)">
+          <input
+            type="hidden"
+            name="_id"
+            #_id="ngModel"
+            [(ngModel)]="notesService.selectedNotes._id"
+          />
+
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">title</i>
+              <input
+                id="title"
+                type="text"
+                name="title"
+                #titleInput="ngModel"
+                [(ngModel)]="notesService.selectedNotes.title"
+                required
+                [ngClass]="{
+                  invalid: titleInput.invalid && titleInput.touched,
+                  valid: titleInput.valid && titleInput.touched
+                }"
+              />
+              <label
+                for="title"
+                [class.active]="notesService.selectedNotes.title"
+                >Título</label
+              >
+              <span
+                class="helper-text"
+                *ngIf="titleInput.invalid && titleInput.touched"
+                data-error="Campo requerido"
+              ></span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">description</i>
+              <textarea
+                id="description"
+                name="description"
+                class="materialize-textarea"
+                #descriptionInput="ngModel"
+                [(ngModel)]="notesService.selectedNotes.description"
+                required
+                [ngClass]="{
+                  invalid: descriptionInput.invalid && descriptionInput.touched,
+                  valid: descriptionInput.valid && descriptionInput.touched
+                }"
+              ></textarea>
+              <label
+                for="description"
+                [class.active]="notesService.selectedNotes.description"
+                >Descripción</label
+              >
+              <span
+                class="helper-text"
+                *ngIf="descriptionInput.invalid && descriptionInput.touched"
+                data-error="Campo requerido"
+              ></span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s12">
+              <button
+                type="button"
+                class="btn waves-effect waves-light grey lighten-1 mr-2"
+                (click)="resetForm(notasForm)"
+              >
+                <i class="material-icons left">clear_all</i>Limpiar
+              </button>
+              <button
+                type="submit"
+                class="btn waves-effect waves-light blue darken-2"
+                [disabled]="!notasForm.valid"
+              >
+                <i class="material-icons left">save</i>Salvar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="col s12 m8">
+    <div class="card hoverable z-depth-3">
+      <div class="card-content">
+        <span class="card-title">Lista de Notas</span>
+        <div class="responsive-table">
+          <table class="striped highlight">
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th class="center-align">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- ngFor para recorrer el arreglo notas que viene de notas.components.ts -->
+              <tr *ngFor="let notas of notesService.notas">
+                <td>{{ notas.title }}</td>
+                <td>{{ notas.description }}</td>
+                <td class="center-align">
+                  <a
+                    (click)="editNote(notas)"
+                    class="btn-floating btn-small waves-effect waves-light blue tooltipped"
+                    data-position="top"
+                    data-tooltip="Editar"
+                  >
+                    <i class="material-icons">edit</i>
+                  </a>
+                  <a
+                    (click)="deleteNote(notas._id, notasForm)"
+                    class="btn-floating btn-small waves-effect waves-light red darken-2 ml-2 tooltipped"
+                    data-position="top"
+                    data-tooltip="Eliminar"
+                  >
+                    <i class="material-icons">delete</i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

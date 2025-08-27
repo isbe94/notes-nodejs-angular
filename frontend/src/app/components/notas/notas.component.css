@@ -1,0 +1,27 @@
+body {
+  background-color: #f4f6f8; /* Un fondo muy claro y moderno */
+}
+
+/* Margen entre botones en la misma línea */
+.btn.mr-2 {
+  margin-right: 10px;
+}
+.btn.ml-2 {
+  margin-left: 10px;
+}
+
+/* Estilo para los tooltips si no se ven bien por defecto */
+.material-tooltip {
+  padding: 8px 10px;
+  font-size: 13px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+}
+
+/* Asegura que los íconos en los botones estén bien espaciados */
+.btn i.left {
+  margin-right: 8px;
+}
+.btn i.right {
+  margin-left: 8px;
+}
