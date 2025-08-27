@@ -3,7 +3,7 @@ const api = express.Router()
 
 const COLLECTIONS = require('./collections')
 
-const { NotesRouter } = require('../Notas/nota.router');
+const { NotesRouter } = require('../notes/nota.router');
 
 api.use( `/${ COLLECTIONS.NOTES }`, NotesRouter );
 
